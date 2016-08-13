@@ -1,0 +1,24 @@
+{
+    "acpower": {
+            "name" : "Téléphone sur secteur/batterie",
+            "groupe" : "Alimentation",
+            "description" : "Permet d'informer jeedom lorsque le téléphone est sur secteur",
+            "profil" :[
+                "power/acpower.ac.prf.xml",
+                "power/acpower.bat.prf.xml"
+            ],
+            "commands": [
+                {
+                    "name": "Secteur",
+                    "type": "info",
+                    "subtype": "binary",
+                    "isVisible": 1,
+                    "isHistorized": 1,
+                    "logicalId": "acpower"
+                }
+            ],
+            "configuration":{
+                "test" : { "name" : "test", "type" : "input" , "default":"plop", "description" : "je suis une description" }
+            }
+    }
+}
