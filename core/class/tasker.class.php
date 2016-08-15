@@ -149,6 +149,21 @@ class taskerCmd extends cmd {
 			if (isset($_options['message'])) {
 				$url .= '&message=' . urlencode($_options['message']);
 			}
+			if (isset($_options['files']) && count($_options['files']) > 0) {
+				$foundfile = null;
+				foreach ($_options['files'] as $file) {
+					$pathinfo = pathinfo($file);
+					if (in_array($pathinfo['extension'], array('jpg', 'png', 'gif'))) {
+						$foundfile = $file;
+						break;
+					}
+				}
+				log::add('tasker', 'debug', $foundfile);
+				if ($foundfile !== null) {
+					$url .= '&picture=' . urlencode(network::getNetworkAccess('external') . '/core/php/downloadFile.php?apikey=' . config::byKey('api') . '&pathfile=' . urlencode($foundfile));
+				}
+			}
+			log::add('tasker', 'debug', $url);
 			$request_http = new com_http($url);
 			$request_http->exec();
 		}
