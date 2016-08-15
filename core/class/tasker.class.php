@@ -29,6 +29,18 @@ class tasker extends eqLogic {
 		if (!is_object($cmd) || $cmd->getEqType() != 'tasker') {
 			throw new Exception(__('Commande ID tasker inconnu, ou la commande n\'est pas de type tasker : ', __FILE__) . init('id'));
 		}
+		if ($cmd->getLogicalId() == 'autoremote::notify') {
+			if ($cmd->getCache('storeVariable', 'none') != 'none') {
+				$dataStore = new dataStore();
+				$dataStore->setType('scenario');
+				$dataStore->setKey($cmd->getCache('storeVariable', 'none'));
+				$dataStore->setValue(init('value'));
+				$dataStore->setLink_id(-1);
+				$dataStore->save();
+				$cmd->setCache('storeVariable', 'none');
+			}
+			return;
+		}
 		$cmd->event(init('value'));
 	}
 
@@ -89,28 +101,32 @@ class tasker extends eqLogic {
 			'#apikey#' => config::byKey('api'),
 			'#network::external#' => network::getNetworkAccess('external'),
 		);
-		foreach ($config['commands'] as &$command) {
-			$cmd = $this->getCmd(null, $command['logicalId']);
-			if (!is_object($cmd)) {
-				$cmd = new taskerCmd();
-				$cmd->setEqLogic_id($this->getId());
-			} else {
-				$command['name'] = $cmd->getName();
-				if (isset($command['display'])) {
-					unset($command['display']);
+		if (isset($config['commands']) && $config['commands'] > 0) {
+			foreach ($config['commands'] as &$command) {
+				$cmd = $this->getCmd(null, $command['logicalId']);
+				if (!is_object($cmd)) {
+					$cmd = new taskerCmd();
+					$cmd->setEqLogic_id($this->getId());
+				} else {
+					$command['name'] = $cmd->getName();
+					if (isset($command['display'])) {
+						unset($command['display']);
+					}
 				}
+				utils::a2o($cmd, $command);
+				$cmd->save();
+				$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 			}
-			utils::a2o($cmd, $command);
-			$cmd->save();
-			$replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
 		}
 
-		foreach ($config['configuration'] as $key => $parameter) {
-			$default = '';
-			if (isset($parameter['default'])) {
-				$default = $parameter['default'];
+		if (isset($config['configuration']) && $config['configuration'] > 0) {
+			foreach ($config['configuration'] as $key => $parameter) {
+				$default = '';
+				if (isset($parameter['default'])) {
+					$default = $parameter['default'];
+				}
+				$replace['#' . $key . '#'] = $this->getConfiguration('tasker::' . $key, $default);
 			}
-			$replace['#' . $key . '#'] = $this->getConfiguration('tasker::' . $key, $default);
 		}
 
 		$dir = dirname(__FILE__) . '/../../../../tmp/tasker';
@@ -143,11 +159,15 @@ class taskerCmd extends cmd {
 			if ($eqLogic->getConfiguration('autoremote::password') != '') {
 				$url .= '&password=' . urlencode($eqLogic->getConfiguration('autoremote::password'));
 			}
+			if (isset($_options['message']) && (!isset($_options['title']) || $_options['title'] == '')) {
+				$_options['title'] = $_options['message'];
+				unset($_options['message']);
+			}
 			if (isset($_options['title'])) {
 				$url .= '&title=' . urlencode($_options['title']);
 			}
 			if (isset($_options['message'])) {
-				$url .= '&message=' . urlencode($_options['message']);
+				$url .= '&text=' . urlencode($_options['message']);
 			}
 			if (isset($_options['files']) && count($_options['files']) > 0) {
 				$foundfile = null;
@@ -158,12 +178,20 @@ class taskerCmd extends cmd {
 						break;
 					}
 				}
-				log::add('tasker', 'debug', $foundfile);
 				if ($foundfile !== null) {
 					$url .= '&picture=' . urlencode(network::getNetworkAccess('external') . '/core/php/downloadFile.php?apikey=' . config::byKey('api') . '&pathfile=' . urlencode($foundfile));
 				}
 			}
-			log::add('tasker', 'debug', $url);
+			if (isset($_options['answer'])) {
+				$i = 1;
+				foreach ($_options['answer'] as $answer) {
+					$url .= '&action' . $i . '=ask=:=' . urlencode(network::getNetworkAccess('external') . '/core/api/jeeApi.php?apikey=' . config::byKey('api') . '&type=tasker&id=' . $this->getId() . '&value=' . urlencode($answer)) . '&action' . $i . 'name=' . urlencode($answer);
+					if ($i >= 3) {
+						break;
+					}
+					$i++;
+				}
+			}
 			$request_http = new com_http($url);
 			$request_http->exec();
 		}
