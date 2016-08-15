@@ -4,7 +4,7 @@
 		<edate>1471259118093</edate>
 		<id>8</id>
 		<mid0>9</mid0>
-		<nme>sms #name# #eqLogic_id#</nme>
+		<nme>SMS #name# #eqLogic_id#</nme>
 		<Event sr="con0" ve="2">
 			<code>7</code>
 			<pri>0</pri>
@@ -17,7 +17,7 @@
 		<cdate>1471259104354</cdate>
 		<edate>1471259112334</edate>
 		<id>9</id>
-		<nme>sms #name# #eqLogic_id#</nme>
+		<nme>SMS #name# #eqLogic_id#</nme>
 		<Action sr="act0" ve="7">
 			<code>118</code>
 			<Str sr="arg0" ve="3">#network::external#</Str>
