@@ -79,6 +79,7 @@ $('.downloadScene').on('click',function(){
             $('#div_alert').showAlert({message: data.result, level: 'danger'});
             return;
         }
+        $(".li_eqLogic[data-eqLogic_id="+$('.eqLogicAttr[data-l1key=id]').value()+"]").click();
         window.open('core/php/downloadFile.php?pathfile=tmp%2Ftasker%2F*', "_blank", null);
     }   
 });

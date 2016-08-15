@@ -1,0 +1,33 @@
+<TaskerData sr="" dvi="1" tv="4.8u5m">
+	<Profile sr="prof2" ve="2">
+		<cdate>1471256685575</cdate>
+		<edate>1471256753956</edate>
+		<id>2</id>
+		<mid0>3</mid0>
+		<nme>Battery full #name# #eqLogic_id#</nme>
+		<Event sr="con0" ve="2">
+			<cname>battery full</cname>
+			<code>205</code>
+			<pri>0</pri>
+		</Event>
+	</Profile>
+	<Task sr="task3">
+		<cdate>1471256694325</cdate>
+		<edate>1471256734002</edate>
+		<id>3</id>
+		<nme>Battery full  #name# #eqLogic_id#</nme>
+		<Action sr="act0" ve="7">
+			<code>118</code>
+			<Str sr="arg0" ve="3">#network::external#</Str>
+			<Str sr="arg1" ve="3">/core/api/jeeApi.php?type=tasker&amp;apikey=#apikey#&amp;id=#battery_level_id#&amp;value=%BATT</Str>
+			<Str sr="arg1" ve="3"/>
+			<Str sr="arg2" ve="3"/>
+			<Str sr="arg3" ve="3"/>
+			<Str sr="arg4" ve="3"/>
+			<Int sr="arg5" val="10"/>
+			<Str sr="arg6" ve="3"/>
+			<Str sr="arg7" ve="3"/>
+			<Int sr="arg8" val="0"/>
+		</Action>
+	</Task>
+</TaskerData>

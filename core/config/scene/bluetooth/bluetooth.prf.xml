@@ -1,0 +1,78 @@
+<TaskerData sr="" dvi="1" tv="4.8u5m">
+	<Profile sr="prof5" ve="2">
+		<cdate>1471257250035</cdate>
+		<edate>1471257315144</edate>
+		<id>5</id>
+		<limit>true</limit>
+		<mid0>4</mid0>
+		<nme>Bluetooth #name# #eqLogic_id#</nme>
+		<Event sr="con0" ve="2">
+			<code>599</code>
+			<Str sr="arg0" ve="3">android.bluetooth.device.action.ACL_CONNECTED</Str>
+			<Int sr="arg1" val="0"/>
+			<Int sr="arg2" val="0"/>
+			<Str sr="arg3" ve="3"/>
+			<Str sr="arg4" ve="3"/>
+		</Event>
+	</Profile>
+	<Task sr="task4">
+		<cdate>1426693165599</cdate>
+		<edate>1471257315144</edate>
+		<id>4</id>
+		<pri>100</pri>
+		<Action sr="act0" ve="7">
+			<code>664</code>
+			<Str sr="arg0" ve="3">adapter</Str>
+			<Str sr="arg1" ve="3">BluetoothAdapter</Str>
+			<Str sr="arg2" ve="3">getDefaultAdapter
+				{BluetoothAdapter} ()</Str>
+				<Str sr="arg3" ve="3"/>
+				<Str sr="arg4" ve="3"/>
+				<Str sr="arg5" ve="3"/>
+				<Str sr="arg6" ve="3"/>
+				<Str sr="arg7" ve="3"/>
+				<Str sr="arg8" ve="3"/>
+				<Str sr="arg9" ve="3"/>
+			</Action>
+			<Action sr="act1" ve="7">
+				<code>664</code>
+				<Str sr="arg0" ve="3">device</Str>
+				<Str sr="arg1" ve="3">adapter</Str>
+				<Str sr="arg2" ve="3">getRemoteDevice
+					{BluetoothDevice} (String)</Str>
+					<Str sr="arg3" ve="3">%android_bluetooth_device_extra_device</Str>
+					<Str sr="arg4" ve="3"/>
+					<Str sr="arg5" ve="3"/>
+					<Str sr="arg6" ve="3"/>
+					<Str sr="arg7" ve="3"/>
+					<Str sr="arg8" ve="3"/>
+					<Str sr="arg9" ve="3"/>
+				</Action>
+				<Action sr="act2" ve="7">
+					<code>664</code>
+					<Str sr="arg0" ve="3">%name</Str>
+					<Str sr="arg1" ve="3">device</Str>
+					<Str sr="arg2" ve="3">getName
+						{String} ()</Str>
+						<Str sr="arg3" ve="3"/>
+						<Str sr="arg4" ve="3"/>
+						<Str sr="arg5" ve="3"/>
+						<Str sr="arg6" ve="3"/>
+						<Str sr="arg7" ve="3"/>
+						<Str sr="arg8" ve="3"/>
+						<Str sr="arg9" ve="3"/>
+					</Action>
+					<Action sr="act3" ve="7">
+						<code>118</code>
+						<Str sr="arg0" ve="3">#network::external#</Str>
+						<Str sr="arg1" ve="3">/core/api/jeeApi.php?type=tasker&amp;apikey=#apikey#&amp;id=#bluetooth_id#&amp;value=%name</Str>
+						<Str sr="arg2" ve="3"/>
+						<Str sr="arg3" ve="3"/>
+						<Str sr="arg4" ve="3"/>
+						<Int sr="arg5" val="10"/>
+						<Str sr="arg6" ve="3"/>
+						<Str sr="arg7" ve="3"/>
+						<Int sr="arg8" val="0"/>
+					</Action>
+				</Task>
+			</TaskerData>

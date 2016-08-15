@@ -1,0 +1,21 @@
+{
+    "batteryfull": {
+            "name" : "Batterie chargée",
+            "groupe" : "Alimentation",
+            "description" : "Envoi le niveau de batterie lorsque celle-ci est chargé",
+            "profil" :[
+                "power/batteryfull.prf.xml"
+            ],
+            "commands": [
+                {
+                    "name": "Niveau de batterie",
+                    "type": "info",
+                    "subtype": "numeric",
+                    "isVisible": 1,
+                    "isHistorized": 1,
+                    "unite" : "%",
+                    "logicalId": "battery_level"
+                }
+            ]
+    }
+}

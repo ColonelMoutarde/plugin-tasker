@@ -1,0 +1,25 @@
+{
+    "location": {
+            "name" : "Position",
+            "groupe" : "Localisation",
+            "description" : "Envoi les coordonées GPS du téléphone lorsque l'utilisateur entre dans un certain périmètre",
+            "profil" :[
+                "location/location.prf.xml"
+            ],
+            "commands": [
+                {
+                    "name": "Position",
+                    "type": "info",
+                    "subtype": "string",
+                    "isVisible": 1,
+                    "isHistorized": 0,
+                    "logicalId": "location"
+                }
+            ],
+            "configuration":{
+                "lat" : { "name" : "Latitude", "type" : "input" , "default":"", "description" : "Latitude du centre du périmétre" },
+                "lon" : { "name" : "Latitude", "type" : "input" , "default":"", "description" : "Latitude du centre du périmétre" },
+                "accuracy" : { "name" : "Diamètre", "type" : "input" , "default":"200", "description" : "Diamètre du périmétre en m" }
+            }
+    }
+}

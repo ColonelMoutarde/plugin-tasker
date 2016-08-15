@@ -1,0 +1,34 @@
+<TaskerData sr="" dvi="1" tv="4.8u5m">
+	<Profile sr="prof6" ve="2">
+		<cdate>1471258088950</cdate>
+		<edate>1471258186705</edate>
+		<id>6</id>
+		<mid0>7</mid0>
+		<nme>position #name# #eqLogic_id#</nme>
+		<Loc sr="con0">
+			<cname>coordonée</cname>
+			<lat>#lat#</lat>
+			<long>#lon#</long>
+			<prv>2</prv>
+			<rad>#accuracy#</rad>
+		</Loc>
+	</Profile>
+	<Task sr="task7">
+		<cdate>1471258111171</cdate>
+		<edate>1471258172228</edate>
+		<id>7</id>
+		<nme>position #name# #eqLogic_id#</nme>
+		<Action sr="act0" ve="7">
+			<code>118</code>
+			<Str sr="arg0" ve="3">#network::external#</Str>
+			<Str sr="arg1" ve="3">/core/api/jeeApi.php?type=tasker&amp;apikey=#apikey#&amp;id=#location_id#&amp;value=%name</Str>
+			<Str sr="arg2" ve="3"/>
+			<Str sr="arg3" ve="3"/>
+			<Str sr="arg4" ve="3"/>
+			<Int sr="arg5" val="10"/>
+			<Str sr="arg6" ve="3"/>
+			<Str sr="arg7" ve="3"/>
+			<Int sr="arg8" val="0"/>
+		</Action>
+	</Task>
+</TaskerData>

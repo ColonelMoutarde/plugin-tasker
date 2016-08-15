@@ -1,0 +1,20 @@
+{
+    "bluetooth": {
+            "name" : "Nom bluetooth",
+            "groupe" : "Bluetooth",
+            "description" : "Nom de l'appareil bluetooth connecté",
+            "profil" :[
+                "bluetooth/bluetooth.prf.xml"
+            ],
+            "commands": [
+                {
+                    "name": "Bluetooth",
+                    "type": "info",
+                    "subtype": "string",
+                    "isVisible": 1,
+                    "isHistorized": 0,
+                    "logicalId": "bluetooth"
+                }
+            ]
+    }
+}
