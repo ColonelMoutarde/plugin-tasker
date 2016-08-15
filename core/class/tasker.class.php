@@ -185,12 +185,15 @@ class taskerCmd extends cmd {
 			if (isset($_options['answer'])) {
 				$i = 1;
 				foreach ($_options['answer'] as $answer) {
-					$url .= '&action' . $i . '=ask=:=' . urlencode(network::getNetworkAccess('external') . '/core/api/jeeApi.php?apikey=' . config::byKey('api') . '&type=tasker&id=' . $this->getId() . '&value=' . urlencode($answer)) . '&action' . $i . 'name=' . urlencode($answer);
+					$url .= '&action' . $i . '=ask=:=' . urlencode(network::getNetworkAccess('external') . '/core/api/jeeApi.php?apikey=' . config::byKey('api') . '&type=tasker&id=' . $this->getId() . '&value=' . urlencode($answer)) . '&action' . $i . 'name=' . urlencode($answer) . '&action' . $i . 'icon=navigation_accept';
 					if ($i >= 3) {
 						break;
 					}
 					$i++;
 				}
+				$url .= '&statusbaricon=action_help';
+			} else {
+				$url .= '&statusbaricon=action_about';
 			}
 			$request_http = new com_http($url);
 			$request_http->exec();
