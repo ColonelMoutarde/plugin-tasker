@@ -62,6 +62,22 @@ class tasker extends eqLogic {
 
 	/*     * *********************Méthodes d'instance************************* */
 
+	public function postSave() {
+		if ($this->getConfiguration('autoremote::url') != '') {
+			$cmd = $this->getCmd(null, 'autoremote::notify');
+			if (!is_object($cmd)) {
+				$cmd = new taskerCmd();
+				$cmd->setLogicalId('autoremote::notify');
+				$cmd->setIsVisible(1);
+				$cmd->setName(__('Notification', __FILE__));
+			}
+			$cmd->setType('action');
+			$cmd->setSubType('message');
+			$cmd->setEqLogic_id($this->getId());
+			$cmd->save();
+		}
+	}
+
 	public function generateXml($_scene) {
 		$config = self::sceneParameters($_scene);
 		if (count($config) == 0) {
@@ -121,7 +137,21 @@ class taskerCmd extends cmd {
 	/*     * *********************Methode d'instance************************* */
 
 	public function execute($_options = array()) {
-
+		$eqLogic = $this->getEqLogic();
+		if ($this->getLogicalId() == 'autoremote::notify') {
+			$url = 'https://autoremotejoaomgcd.appspot.com/sendnotification?key=' . $eqLogic->getConfiguration('autoremote::key');
+			if ($eqLogic->getConfiguration('autoremote::password') != '') {
+				$url .= '&password=' . urlencode($eqLogic->getConfiguration('autoremote::password'));
+			}
+			if (isset($_options['title'])) {
+				$url .= '&title=' . urlencode($_options['title']);
+			}
+			if (isset($_options['message'])) {
+				$url .= '&message=' . urlencode($_options['message']);
+			}
+			$request_http = new com_http($url);
+			$request_http->exec();
+		}
 	}
 
 	/*     * **********************Getteur Setteur*************************** */

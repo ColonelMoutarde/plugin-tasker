@@ -93,6 +93,18 @@ foreach (object::all() as $object) {
          <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
        </div>
      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">{{Autoremote clef}}</label>
+        <div class="col-sm-3">
+          <input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="autoremote::key" />
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-sm-3 control-label">{{Autoremote password}}</label>
+        <div class="col-sm-3">
+          <input type="password" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="autoremote::password" />
+        </div>
+      </div>
 
           <?php
 $groups = array();
