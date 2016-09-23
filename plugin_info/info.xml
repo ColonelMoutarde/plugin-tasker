@@ -3,10 +3,8 @@
     <id>tasker</id>
     <name>Tasker</name>
     <description>Plugin tasker</description>
-    <icon>fa fa-keyboard-o</icon>
     <licence>AGPL</licence>
-    <author>Loïc Gevrey</author>
-    <installation>Aucune</installation>
+    <author>Loïc</author>
     <require>2.4</require>
     <category>programming</category>
 </info>
