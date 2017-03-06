@@ -31,13 +31,7 @@ class tasker extends eqLogic {
 		}
 		if ($cmd->getLogicalId() == 'autoremote::notify') {
 			if ($cmd->getCache('storeVariable', 'none') != 'none') {
-				$dataStore = new dataStore();
-				$dataStore->setType('scenario');
-				$dataStore->setKey($cmd->getCache('storeVariable', 'none'));
-				$dataStore->setValue(init('value'));
-				$dataStore->setLink_id(-1);
-				$dataStore->save();
-				$cmd->setCache('storeVariable', 'none');
+				$cmd->askResponse(init('value'));
 			}
 			return;
 		}
